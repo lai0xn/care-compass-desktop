@@ -37,7 +37,7 @@ type PromptPayload struct {
 	Prompt string `json:"prompt" binding:"required"`
 }
 
-type SignupResponse struct {
+type UserResponse struct {
 	ID        int       `json:"ID"`
 	CreatedAt time.Time `json:"CreatedAt"`
 	UpdatedAt time.Time `json:"UpdatedAt"`

@@ -1,15 +1,19 @@
 <script>
-// @ts-nocheck
-
     import Title from './Title.svelte';
     import home from './assets/images/home.png';
     import settings from './assets/images/settings.png';
     import recent from './assets/images/recent.png';
+    import { user_id } from './stores.js';
+
+    import {GetUserByID} from "../wailsjs/go/main/App.js"
 
     import { selected_page } from './stores.js';
     let select_page = (page) => {
         selected_page.set(page)
     }
+    GetUserByID($user_id.token).then((user)=>{
+        console.log(user)
+    })
 
 </script>
 
@@ -17,8 +21,18 @@
     <Title title="user" />
     <div id="profile">
         <img id="picture" src="https://www.w3schools.com/howto/img_avatar.png" alt="pfp">
-        <div id="name">issam agoudjil</div>
-        <div id="field">generalist</div>
+        {#await GetUserByID(user_id.token)}
+            Loading...
+        {:then user}
+            <div id="name">
+                    {user.name}
+            </div>
+            <div id="field">
+                {user.email}
+            </div>
+        {:catch error}
+            {error.message}
+        {/await}
     </div>
     <Title title="navigation" />
     <div id="links">

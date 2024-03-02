@@ -7,10 +7,23 @@ import (
 	"net/http"
 )
 
-func GetUserByID(id string) {
+func GetUserByID(id string) UserResponse {
+
+	req, _ := http.NewRequest("GET", API_BASE_URI+GET_USER_URI+id, nil)
+
+	res, _ := http.DefaultClient.Do(req)
+	buffer, err := io.ReadAll(res.Body)
+	if err != nil {
+		panic(err)
+	}
+	var response UserResponse
+	json.Unmarshal(buffer, &response)
+	response.Status = res.StatusCode
+
+	return response
 }
 
-func Signup(payload SignUpPayload) SignupResponse {
+func Signup(payload SignUpPayload) UserResponse {
 	body, err := json.Marshal(payload)
 	if err != nil {
 		panic(err)
@@ -24,7 +37,7 @@ func Signup(payload SignUpPayload) SignupResponse {
 	if err != nil {
 		panic(err)
 	}
-	var response SignupResponse
+	var response UserResponse
 	json.Unmarshal(buffer, &response)
 	response.Status = res.StatusCode
 	return response

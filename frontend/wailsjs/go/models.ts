@@ -54,7 +54,7 @@ export namespace backend {
 	        this.sex = source["sex"];
 	    }
 	}
-	export class SignupResponse {
+	export class UserResponse {
 	    ID: number;
 	    // Go type: time
 	    CreatedAt: any;
@@ -71,7 +71,7 @@ export namespace backend {
 	    status: number;
 	
 	    static createFrom(source: any = {}) {
-	        return new SignupResponse(source);
+	        return new UserResponse(source);
 	    }
 	
 	    constructor(source: any = {}) {

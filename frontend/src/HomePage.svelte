@@ -1,9 +1,7 @@
 <script>
     import Title from "./Title.svelte";
     import {select_page} from "./stores";
-
-    let patient_id = "";
-    $: enable =  patient_id.replace(/-|\s/g, '').length == 16
+    import {patient_id} from "./stores";
 </script>
 
 <main class="frosted-panel">
@@ -12,12 +10,8 @@
         <div id="welcome">welcome back doctor issam agoudjil</div>
         <div id="input">
             <span>input patient id to view patient history</span>
-            <input type="text" id="patient-id" placeholder="abcd-efgh-ijkl-mnop" bind:value={patient_id}>
-            {#if enable == false}
-                <button disabled>view</button>
-            {:else}
-                <button on:click={()=>{select_page('Patient')}}>view</button>
-            {/if}
+            <input type="text" id="patient-id" placeholder="abcd-efgh-ijkl-mnop" bind:value={$patient_id}>
+            <button on:click={()=>{select_page('Patient')}}>view</button>
         </div>
     </div>
 </main>

@@ -7,7 +7,7 @@
             alergies:
             <ul>
                 <li>peanuts</li>
-                <li>hoes</li>
+                <li>honey</li>
             </ul>
             diagnosed with:
             <ul>

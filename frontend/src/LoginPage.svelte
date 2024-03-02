@@ -1,15 +1,23 @@
 <script>
 	import { select_page } from "./stores";
+    import { user_id } from "./stores";
     import Title from "./Title.svelte";
     import {Login} from "../wailsjs/go/main/App.js"
-    let user = {
+    
+    let new_user = {
         email: '',
         password: ''
     }
+
     let submit = (event) => {
-        Login(user).then((res)=>{
+        event.preventDefault()
+        Login(new_user).then((res)=>{
             console.log(res)
             if(res.status !== 200) alert('login error')
+            else{
+                user_id.set({token: res.token})
+                select_page('Home')
+            }
         })
     }
 </script>
@@ -17,8 +25,8 @@
     <Title title="login"/>
     <form class="login-form">
         <h1>Login</h1>
-        <input type="text" placeholder="Email" required bind:value={user.email} />
-        <input type="password" placeholder="Password" required bind:value={user.password} />
+        <input type="text" placeholder="Email" required bind:value={new_user.email} />
+        <input type="password" placeholder="Password" required bind:value={new_user.password} />
         <button type="button" on:click={submit}>Login</button>
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <p>Don't have an account? <span on:click={()=>select_page('SignUp')}>Signup</span></p>

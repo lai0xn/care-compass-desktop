@@ -27,8 +27,13 @@ func (a *App) Greet(name string) string {
 	return fmt.Sprintf("Hello %s, It's show time!", name)
 }
 
-func (a *App) Signup(payload backend.SignUpPayload) backend.SignupResponse {
+func (a *App) Signup(payload backend.SignUpPayload) backend.UserResponse {
 	s := backend.Signup(payload)
+	return s
+}
+
+func (a *App) GetUserByID(id string) backend.UserResponse {
+	s := backend.GetUserByID(id)
 	return s
 }
 
