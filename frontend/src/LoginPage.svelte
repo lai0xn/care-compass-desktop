@@ -1,14 +1,21 @@
 <script>
 	import { select_page } from "./stores";
     import Title from "./Title.svelte";
+    let user = {
+        username: '',
+        password: ''
+    }
+    let submit = (event) => {
+        console.table(user);
+    }
 </script>
 <main class="frosted-panel">
     <Title title="login"/>
     <form class="login-form">
         <h1>Login</h1>
-        <input type="text" placeholder="Username" />
-        <input type="password" placeholder="Password" />
-        <button type="submit" on:click={()=>select_page('Home')}>Login</button>
+        <input type="text" placeholder="Email" required bind:value={user.username} />
+        <input type="password" placeholder="Password" required bind:value={user.password} />
+        <button type="submit" on:click={submit}>Login</button>
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <p>Don't have an account? <span on:click={()=>select_page('SignUp')}>Signup</span></p>
     </form>
