@@ -1,26 +1,30 @@
 html {
-    background-color: rgba(27, 38, 54, 1);
-    text-align: center;
-    color: white;
+    background: white;
+    color: var(--color);
+    font-family: 'Roboto', cursive;
 }
 
 body {
     margin: 0;
-    color: white;
-    font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-}
-
-@font-face {
-    font-family: "Nunito";
-    font-style: normal;
-    font-weight: 400;
-    src: local(""),
-    url("assets/fonts/nunito-v16-latin-regular.woff2") format("woff2");
-}
-
-#app {
     height: 100vh;
-    text-align: center;
+    overflow: hidden;
+}
+
+.frosted-glass {
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+}
+.frosted-panel {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 10px;
+    overflow-y: auto;
+}
+#preview img{ /*has to be here so stupid compiler doesnt delete it*/
+    width: 100%;
+}
+*{
+    --color: #080808;
+    box-sizing: border-box;
 }
