@@ -1,7 +1,7 @@
 <script>
     import { select_page } from "./stores";
     import Title from "./Title.svelte";    
-
+    import {Signup} from "../wailsjs/go/main/App.js"
     /*
     	    name: string;
 	    lastName: string;
@@ -20,11 +20,17 @@
         phoneNumber: '',
         isDoctor: true,
         isActive: true,
-        sex: 'male',
+        sex: true,
     }
 
     let submit = (event) => {
+        event.preventDefault();
         console.table(new_user);
+        Signup(new_user).then((res)=>{
+            console.log(res)
+        }).catch((err)=>{
+            console.log(err)
+        })
     }
         
 </script>
@@ -37,8 +43,8 @@
         <input type="text" placeholder="Email" required bind:value={new_user.email} />
         <input type="text" placeholder="Phone Number" required bind:value={new_user.phoneNumber} />
         <div class='input'>gender:
-            <input type="radio" name="gender" value="male" bind:group={new_user.sex}> male
-            <input type="radio" name="gender" value="female" bind:group={new_user.sex}> female
+            <input type="radio" name="gender" value={true} bind:group={new_user.sex}> male
+            <input type="radio" name="gender" value={false} bind:group={new_user.sex}> female
         </div>
         <input type="password" placeholder="Password" required bind:value={new_user.password} />
         <!-- <input type="password" placeholder="Confirm Password" /> -->

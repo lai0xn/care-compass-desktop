@@ -4,4 +4,4 @@ import {backend} from '../models';
 
 export function Greet(arg1:string):Promise<string>;
 
-export function Signup(arg1:backend.SignUpPayload):Promise<void>;
+export function Signup(arg1:backend.SignUpPayload):Promise<backend.SignupResponse>;

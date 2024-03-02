@@ -19,6 +19,7 @@ func Signup(payload SignUpPayload) SignupResponse {
 	if err != nil {
 		panic(err)
 	}
+	http.DefaultClient.Do(req)
 	buffer, err := io.ReadAll(req.Body)
 	if err != nil {
 		panic(err)
