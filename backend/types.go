@@ -6,6 +6,11 @@ import (
 	uuid "github.com/satori/go.uuid"
 )
 
+type LoginResponse struct {
+	Token  string `json:"token"`
+	Status int    `json:"status"`
+}
+
 type SignUpPayload struct {
 	Name        string `json:"name"        binding:"required"`
 	LastName    string `json:"lastName"    binding:"required"`
@@ -56,4 +61,5 @@ type SignupResponse struct {
 	BloodGroup       string `json:"BloodGroup"`
 	ChronicDisease   string `json:"ChronicDisease"`
 	ActiveMedication string `json:"ActiveMedication"`
+	Status           int    `json:"status"`
 }

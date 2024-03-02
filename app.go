@@ -31,3 +31,8 @@ func (a *App) Signup(payload backend.SignUpPayload) backend.SignupResponse {
 	s := backend.Signup(payload)
 	return s
 }
+
+func (a *App) Login(payload backend.LoginPayload) backend.LoginResponse {
+	s := backend.Login(payload)
+	return s
+}

@@ -2,16 +2,7 @@
     import { select_page } from "./stores";
     import Title from "./Title.svelte";    
     import {Signup} from "../wailsjs/go/main/App.js"
-    /*
-    	    name: string;
-	    lastName: string;
-	    password: string;
-	    email: string;
-	    phoneNumber: string;
-	    isDoctor: boolean;
-	    isActive: boolean;
-	    sex: boolean;
-    */
+
     let new_user = {
         name: '',
         lastName: '',
@@ -24,7 +15,6 @@
     }
 
     let submit = (event) => {
-        event.preventDefault();
         console.table(new_user);
         Signup(new_user).then((res)=>{
             console.log(res)
@@ -40,7 +30,7 @@
         <h1>Signup</h1>
         <input type="text" placeholder="First Name" required bind:value={new_user.name} />
         <input type="text" placeholder="Last Name" required bind:value={new_user.lastName} />
-        <input type="text" placeholder="Email" required bind:value={new_user.email} />
+        <input  placeholder="Email" type="email" required bind:value={new_user.email} />
         <input type="text" placeholder="Phone Number" required bind:value={new_user.phoneNumber} />
         <div class='input'>gender:
             <input type="radio" name="gender" value={true} bind:group={new_user.sex}> male

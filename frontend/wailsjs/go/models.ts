@@ -1,5 +1,33 @@
 export namespace backend {
 	
+	export class LoginPayload {
+	    email: string;
+	    password: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new LoginPayload(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.email = source["email"];
+	        this.password = source["password"];
+	    }
+	}
+	export class LoginResponse {
+	    token: string;
+	    status: number;
+	
+	    static createFrom(source: any = {}) {
+	        return new LoginResponse(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.token = source["token"];
+	        this.status = source["status"];
+	    }
+	}
 	export class SignUpPayload {
 	    name: string;
 	    lastName: string;
@@ -40,6 +68,7 @@ export namespace backend {
 	    BloodGroup: string;
 	    ChronicDisease: string;
 	    ActiveMedication: string;
+	    status: number;
 	
 	    static createFrom(source: any = {}) {
 	        return new SignupResponse(source);
@@ -57,6 +86,7 @@ export namespace backend {
 	        this.BloodGroup = source["BloodGroup"];
 	        this.ChronicDisease = source["ChronicDisease"];
 	        this.ActiveMedication = source["ActiveMedication"];
+	        this.status = source["status"];
 	    }
 	
 		convertValues(a: any, classs: any, asMap: boolean = false): any {
