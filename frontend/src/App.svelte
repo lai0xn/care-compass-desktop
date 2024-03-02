@@ -1,79 +1,66 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
 <script>
-  import logo from './assets/images/logo-universal.png'
-  import {Greet} from '../wailsjs/go/main/App.js'
+    import Nav from "./Nav.svelte";
+    import HomePage from "./HomePage.svelte";
+    import PatientPage from "./PatientPage.svelte";
+    // import Extra from "./Extra.svelte";
+    import ColorBackground from "./ColorBackground.svelte";
+    import RecentPage from "./RecentPage.svelte";
+    import SettingsPage from "./SettingsPage.svelte";
+    import ReportEditor from "./ReportEditor.svelte";
+    import LoginPage from "./LoginPage.svelte";
+    import SignupPage from "./SignupPage.svelte";
 
-  let resultText = "Please enter your name below 👇"
-  let name
-
-  function greet() {
-    Greet(name).then(result => resultText = result)
-  }
+    import { selected_page } from "./stores.js";
+    $: do_nav = !['Login', 'SignUp'].includes($selected_page);
 </script>
 
-<main>
-  <img alt="Wails logo" id="logo" src="{logo}">
-  <div class="result" id="result">{resultText}</div>
-  <div class="input-box" id="input">
-    <input autocomplete="off" bind:value={name} class="input" id="name" type="text"/>
-    <button class="btn" on:click={greet}>Greet</button>
-  </div>
+<ColorBackground />
+<main style={do_nav?'':'grid-template-columns: 1fr'}>
+    {#if do_nav}
+        <Nav />
+        <hr>
+    {/if}
+    {#if $selected_page == 'Patient'}
+        <PatientPage />
+    {:else if $selected_page == 'Home'}
+        <HomePage />
+    {:else if $selected_page == 'Recent'}
+        <RecentPage />
+    {:else if $selected_page == 'Settings'}
+        <SettingsPage />
+    {:else if $selected_page == 'ReportEditor'}
+        <ReportEditor />
+    {:else if $selected_page == 'Login'}
+        <LoginPage />
+    {:else if $selected_page == 'SignUp'}
+        <SignupPage />
+    {:else}
+        404 PAGE NOT FOUND
+    {/if}
+    <!--
+        <hr>
+        <Extra />
+    -->
 </main>
 
 <style>
-
-  #logo {
-    display: block;
-    width: 50%;
-    height: 50%;
-    margin: auto;
-    padding: 10% 0 0;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-origin: content-box;
-  }
-
-  .result {
-    height: 20px;
-    line-height: 20px;
-    margin: 1.5rem auto;
-  }
-
-  .input-box .btn {
-    width: 60px;
-    height: 30px;
-    line-height: 30px;
-    border-radius: 3px;
-    border: none;
-    margin: 0 0 0 20px;
-    padding: 0 8px;
-    cursor: pointer;
-  }
-
-  .input-box .btn:hover {
-    background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
-    color: #333333;
-  }
-
-  .input-box .input {
-    border: none;
-    border-radius: 3px;
-    outline: none;
-    height: 30px;
-    line-height: 30px;
-    padding: 0 10px;
-    background-color: rgba(240, 240, 240, 1);
-    -webkit-font-smoothing: antialiased;
-  }
-
-  .input-box .input:hover {
-    border: none;
-    background-color: rgba(255, 255, 255, 1);
-  }
-
-  .input-box .input:focus {
-    border: none;
-    background-color: rgba(255, 255, 255, 1);
-  }
-
+    main{
+        display: grid;
+        height: 100vh;
+        grid-template-columns: 2fr 6px 5fr /*5px 4fr*/;
+        padding: 10px;
+        gap: 4px;
+    }
+    hr{
+        margin: 0;
+        border: none;
+        background-color: #FFFC;
+        height: 30px;
+        margin: auto 0px;
+        border-radius: 5px;
+    }
 </style>
